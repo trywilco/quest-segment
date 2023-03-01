@@ -45,9 +45,9 @@ trigger:
             else:
               do:
               - actionId: github_pr_reject
-                  params:
-                    person: keen
-                    message: "Looks like it's still missing something. Can you take a look?"
+                params:
+                  person: keen
+                  message: "Looks like it's still missing something. Can you take a look?"
         github_pr_merged:
           do:
           - actionId: finish_step
