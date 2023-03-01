@@ -10,7 +10,7 @@ level: beginner
 steps:
 - segment_introduction
 - segment_token
-- segment_configure
+- segment_setup
 - segment_track
 - segment_destination
 duration: 1.5
