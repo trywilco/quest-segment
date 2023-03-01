@@ -1,0 +1,54 @@
+id: segment_setup
+learningObjectives: 
+- Learn how to set up Segment in our website
+hints:
+- 
+startFlow:
+  do:
+  - actionId: bot_message
+    params:
+      person: keen
+      messages:
+      - text: "Great, now that you have your API token, let's integrate it with our website."
+      - text: "To do that, we'll need to add the Segment snippet to our website. The snippet is a small piece of code that you can add to your website to start collecting data about your users."
+      - text: "To add the snippet, copy the code from the Segment dashboard and paste it into the `<head>` tag of your website."
+      - text: "Once you've done that, :instruction[open a new PR with the changes]"
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    switch:
+      key: "${eventType}"
+      cases:
+        github_pr_opened:
+          do:
+          - actionId: github_pr_comment
+            params:
+              person: keen
+              message: "Hey @${user.githubuser}, thanks for opening this PR! I'll take a look at it shortly."
+        github_pr_workflow_complete_success:
+          do:
+            if:
+              conditions:
+              - conditionId: github_is_file_modified
+                params:
+                  file: "public/index.html"
+                then:
+                  do:
+                  - actionId: bot_message
+                    params:
+                      person: keen
+                      messages:
+                      - text: "Nice work! You've successfully integrated Segment with our website."
+                  - actionId: github_pr_approve
+                    params:
+                      person: keen
+                      message: "Nice work! You've successfully integrated Segment with our website."
+                else:
+                  do:
+                  - actionId: github_pr_reject
+                    params:
+                      person: keen
+                      message: "Looks like it's still missing something. Can you take a look?"
+        github_pr_merged:
+          do:
+          - actionId: finish_step

@@ -1,0 +1,45 @@
+id: 04_segment_track
+learningObjectives: 
+- Learn how to track events in Segment
+
+hints:
+- "To fire a new event, you can use the `analytics.track()` method. You can find more information about it in the [Segment documentation](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/#track)."
+- "The event name should be `button_clicked` and the properties should be `{ button: 'sign up' }`"
+- "To find the event time, use the raw data of the event. You can find it in the debug tab of the source page."
+
+startFlow:
+  do:
+  - actionId: bot_message
+    params:
+      person: keen
+      messages:
+      - text: "If we integrated Segment with our website, we could track events like when a user signs up, or when they click on a button."
+      - text: "Let's fire a new event called `button_clicked` when a user clicks on the sign up button."
+      - text: "After you fire the event, go to the source page and go to the debug tab. You should see the event there."
+      - text: ":instruction[Once you see it send me the time when the event was fired.]"
+
+trigger:
+  type: user_message
+  params: 
+    person: keen
+  flowNode:
+    if:
+      conditions:
+      - conditionId: is_truthy
+        params:
+          value: "${new Date(userMessageText).toDateString() === new Date().toDateString()}"
+      then:
+        do:
+        - actionId: bot_message
+          params:
+            person: keen
+            messages:
+            - text: "Awesome, we just manage to track an event in Segment. Now let's move on to the next step."
+        - actionId: finish_step
+      else:
+        do:
+        - actionId: bot_message
+          params:
+            person: keen
+            messages:
+            - text: "Hmmm, that doesn't look like the valid time. Try again?"
