@@ -2,7 +2,7 @@ id: segment_setup
 learningObjectives: 
 - Learn how to set up Segment in our website
 hints:
-- 
+- See here: https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/
 startFlow:
   do:
   - actionId: bot_message
@@ -27,28 +27,27 @@ trigger:
               message: "Hey @${user.githubuser}, thanks for opening this PR! I'll take a look at it shortly."
         github_pr_workflow_complete_success:
           do:
-            if:
-              conditions:
-              - conditionId: github_is_file_modified
-                params:
-                  file: "public/index.html"
-                then:
-                  do:
-                  - actionId: bot_message
-                    params:
-                      person: keen
-                      messages:
-                      - text: "Nice work! You've successfully integrated Segment with our website."
-                  - actionId: github_pr_approve
-                    params:
-                      person: keen
-                      message: "Nice work! You've successfully integrated Segment with our website."
-                else:
-                  do:
-                  - actionId: github_pr_reject
-                    params:
-                      person: keen
-                      message: "Looks like it's still missing something. Can you take a look?"
+            conditions:
+            - conditionId: github_is_file_modified
+              params:
+                file: "public/index.html"
+              then:
+                do:
+                - actionId: bot_message
+                  params:
+                    person: keen
+                    messages:
+                    - text: "Nice work! You've successfully integrated Segment with our website."
+                - actionId: github_pr_approve
+                  params:
+                    person: keen
+                    message: "Nice work! You've successfully integrated Segment with our website."
+              else:
+                do:
+                - actionId: github_pr_reject
+                  params:
+                    person: keen
+                    message: "Looks like it's still missing something. Can you take a look?"
         github_pr_merged:
           do:
           - actionId: finish_step
