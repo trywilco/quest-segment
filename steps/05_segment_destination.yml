@@ -25,11 +25,10 @@ trigger:
   params: 
     event: segment_destination
   flowNode:
-    then:
-      do:
-      - actionId: bot_message
-        params:
-          person: keen
-          messages:
-          - text: "Awesome, we just manage to connect a source to a destination in Segment!"
-      - actionId: finish_step
+    do:
+    - actionId: bot_message
+      params:
+        person: keen
+        messages:
+        - text: "Awesome, we just manage to connect a source to a destination in Segment!"
+    - actionId: finish_step
