@@ -20,5 +20,4 @@ skills:
 - analytics
 - communication
 questDependency: docker_localsetup
-slogan: test
 repository: https://github.com/trywilco/Anythink-Market-Public
