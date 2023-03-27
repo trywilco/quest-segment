@@ -1,0 +1,44 @@
+id: setup_cloudinary_account
+learningObjectives:
+  - Understand Cloudinary's key features
+  - Sign up for a Cloudinary account
+hints:
+  - "Sign up here: https://cloudinary.com/users/register_free"
+  - "You can see your cloud name in the main dashboard: https://console.cloudinary.com/console/"
+
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: lucca
+        messages:
+          - text: "Greetings, code adventurer! I'm Lucca, and I'm going to help you integrate Cloudinary's file uploader into your application today."
+          - text: "Cloudinary is a powerful media management platform that offers seamless file uploading, optimizing, and delivering assets."
+          - text: "First, you'll need to sign up for a Cloudinary account if you haven't already. Ready to begin?"
+          - text: "Once you have a Cloudinary account, create a cloud name and send it to me."
+
+  type: user_message
+  params:
+    person: keen
+  flowNode:
+    if:
+      conditions:
+        - conditionId: text_match_regex
+          params:
+            text: "${userMessageText}"
+            regex: ".*[a-zA-Z0-9]{8-15}.*"
+      then:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: "Great! Now that you have your Cloudinary cloud name, let's get started."
+          - actionId: finish_step
+      else:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: "Hmmm, that doesn't look like a valid Cloudinary cloud name. Try again?"

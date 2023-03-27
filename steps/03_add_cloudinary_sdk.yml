@@ -1,0 +1,53 @@
+id: add_cloudinary_sdk
+learningObjectives:
+  - Understand how to add the Cloudinary SDK to your application
+hints:
+  - "See here: https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/"
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: keen
+        messages:
+          - text: "Now that we have our upload preset, we can start and upload some images."
+          - text: "The first step is to add the Cloudinary SDK to your application."
+          - text: "You can find the SDK here: https://cloudinary.com/documentation/javascript_integration"
+          - text: "Once you've added the SDK to your application, create a new PR with the changes"
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    switch:
+      key: "${eventType}"
+      cases:
+        github_pr_opened:
+          do:
+            - actionId: github_pr_comment
+              params:
+                person: keen
+                message: "Hey @${user.githubuser}, thanks for opening this PR! I'll take a look at it shortly."
+        github_pr_workflow_complete_success:
+          if:
+            conditions:
+              - conditionId: github_is_file_modified
+                params:
+                  file: "public/index.html"
+            then:
+              do:
+                - actionId: bot_message
+                  params:
+                    person: keen
+                    messages:
+                      - text: "Nice work! You've successfully integrated Segment with our website."
+                - actionId: github_pr_approve
+                  params:
+                    person: keen
+                    message: "Nice work! You've successfully integrated Segment with our website."
+            else:
+              do:
+                - actionId: github_pr_reject
+                  params:
+                    person: keen
+                    message: "Looks like it's still missing something. Can you take a look?"
+        github_pr_merged:
+          do:
+            - actionId: finish_step

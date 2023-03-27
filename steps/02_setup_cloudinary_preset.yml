@@ -1,0 +1,43 @@
+id: setup_cloudinary_preset
+learningObjectives:
+  - Understand how to configure Cloudinary's upload preset
+hints:
+  - "See here: https://cloudinary.com/documentation/upload_images#upload_presets"
+  - "You can see your upload preset under settings -> upload"
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: lucca
+        messages:
+          - text: "Now that you have your Cloudinary cloud name, we need to prepare the API to upload files."
+          - text: "In order to upload files to Cloudinary, we need to configure an upload preset."
+          - text: "An upload preset is a set of configuration options that you can apply to your upload requests."
+          - text: "You can create multiple upload presets for different use cases, such as uploading images, videos, or documents."
+          - text: "You should have a upload preset already created for you. Make sure you're using an unsigned one so that we can upload files without an API key."
+reugger:
+  type: user_message
+  params:
+    person: keen
+  flowNode:
+    if:
+      conditions:
+        - conditionId: text_match_regex
+          params:
+            text: "${userMessageText}"
+            regex: ".*[a-zA-Z0-9]{8-15}.*"
+      then:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: "Sweet, now that we have our upload preset, we can start and upload some images."
+          - actionId: finish_step
+      else:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: "Hmmm, that doesn't look like a valid Cloudinary upload preset name. Try again?"

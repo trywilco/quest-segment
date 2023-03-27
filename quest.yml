@@ -1,23 +1,15 @@
-id: Segment
-title: Segment Integration
-subtitle: Connecting Your Platform to the Power of Segment
-description: |
-  In this quest, you will learn how to integrate Segment into your analytics stack, enabling you to collect, unify, and send customer data to hundreds of tools and destinations, such as Google Analytics, Mixpanel, and Salesforce.
-  Through a series of steps and challenges, you will discover how to set up your Segment workspace, configure your data sources, and implement tracking on your website. You will also learn how to use Segment's features and tools to manage your data and troubleshoot any issues.
-  By the end of this quest, you will have a fully functional and optimized Segment integration, allowing you to unlock powerful insights, automate workflows, and drive growth and retention for your business.
-summary: summary
-level: beginner
+id: cloudinary_file_uploader
+title: Integrating Cloudinary File Uploader
+subtitle: Uploading and managing media files using Cloudinary API
+description: In this quest, you'll learn how to integrate Cloudinary's file uploading capabilities into your application. You will cover setting up a Cloudinary account, configuring the API, and implementing the file uploader in your application for efficient media file management.
+level: intermediate
 steps:
-- segment_introduction
-- segment_token
-- segment_setup
-- segment_track
-- segment_destination
-duration: 1.5
+- setup_cloudinary_account
+- setup_cloudinary_preset
+- add_cloudinary_sdk
+- implement_file_uploader
+duration: 0.5
 skills:
 - frontend
-- debugging
-- analytics
+- operations
 - communication
-questDependency: docker_localsetup
-repository: https://github.com/trywilco/Anythink-Market-Public
