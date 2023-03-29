@@ -1,0 +1,42 @@
+id: add_cloudinary_sdk
+learningObjectives:
+  - Add cloudinary file uploader widget to your application
+hints:
+  - "You can find some info here: https://cloudinary.com/documentation/upload_widget"
+
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: keen
+        messages:
+          - text: "Looks like we have everything we need to start uploading some images."
+          - text: "Go to the add item page and replace the text input with the Cloudinary file uploader widget."
+          - text: "Two things to keep in mind: :codeInstruction[the upload button that opens the Cloudinary widget should have 'uploader' id] and :codeInstruction[after you finish upload the image, you shuold show it baack in the user's form]."
+          - text: "once you finished, push your changes and instruction[update the PR]"
+
+githubActions:
+  frontend:
+    capabilities:
+      - jest-puppeteer
+    testFile: "image-uploader.test.js"
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    switch:
+      key: "${eventType}"
+      cases:
+        github_pr_workflow_complete_success:
+          do:
+            - actionId: github_pr_approve
+              params:
+                - message: "Amazing, you've added the Cloudinary file uploader widget to our application!\n\nYou can merge your PR now"
+        github_pr_workflow_complete_failure:
+          do:
+            - actionId: github_pr_comment
+              params:
+                person: keen
+                message: "I tried to upload an image but it didn't work. Please check your code and try again."
+        github_pr_merged:
+          do:
+            - actionId: finish_step
