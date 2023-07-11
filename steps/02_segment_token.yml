@@ -31,7 +31,7 @@ trigger:
           params:
             person: keen
             messages:
-            - text: "Great! Now that you have your API token, let's integrate it with our website."
+            - text: "Great! Now that you have your API token, let's establish the first call from the website to Segment."
         - actionId: finish_step
       else:
         do:

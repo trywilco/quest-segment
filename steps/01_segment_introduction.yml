@@ -9,10 +9,10 @@ startFlow:
     params:
       person: keen
       messages:
-      - text: "Hey there! I'm Keen, your Segment guide. I'll be helping you through this quest. Let's get started!"
-      - text: "Segment is a customer data platform that helps you collect, unify, and send customer data to hundreds of tools and destinations, such as Google Analytics, Mixpanel, and Salesforce."
-      - text: "It's a powerful tool that can help you unlock powerful insights, automate workflows, and drive growth and retention for your business."
-      - text: "First, you'll need to create a Segment account. [You can do that here](https://app.segment.com/signup)"
+      - text: "Today we're going to connect our website to Segment."
+      - text: "If you're not familiar with Segment, here's a brief rundown: it's a customer data platform that acts as a bus for event streams from your customer-facing applications."
+      - text: "In addition, it builds customer profiles with the events so that you can get to know individual users' tendencies, even at massive scale, and personalize their experience with our brand."
+      - text: "First step: let's create a free Segment workspace [here](https://app.segment.com/signup)."
       - text: "Once you've created your account, :instruction[come back here and let me know when you're ready to continue.]"
 trigger:
   type: user_message
