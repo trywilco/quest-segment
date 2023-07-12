@@ -28,7 +28,7 @@ trigger:
           params:
             person: keen
             messages:
-            - text: "Great! Now that you have a Segment account, let's integrate it with our website."
+            - text: "Great job!"
         - actionId: finish_step
       else:
         do:
